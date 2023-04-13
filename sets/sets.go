@@ -1,5 +1,9 @@
 package sets
 
+import (
+	_ "github.com/JacobASchmidt/gofun/streams"
+)
+
 type Set[A comparable] map[A]struct{}
 
 func (s Set[A]) Add(a A) Set[A] {
