@@ -56,5 +56,7 @@ func Difference[A comparable](a streams.Stream[A], b Set[A]) streams.Stream[A] {
 }
 
 func SymmetricDifference[A comparable](a Set[A], b Set[A]) streams.Stream[A] {
-	a_not_in_b := Filter(a.Stream(), fu)
+	a_not_in_b := a.Stream().Filter(func(el A) bool { return !b.Contains(el) })
+	b_not_in_a := b.Stream().Filter(func(el A) bool { return !a.Contains(el) })
+	return streams.Chain(a_not_in_b, b_not_in_a)
 }
